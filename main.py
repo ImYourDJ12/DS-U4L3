@@ -5,23 +5,57 @@
 
 from StackClass import ArrayStack
 
+def read(inPath):
+  with open (inPath, 'r') as openFile:
+    contents = openFile.readlines()
+    return contents
+
+def write(outPath, contents):
+  with open(outPath, 'w') as openFile:
+    openFile.write(contents)
+
+def clean(contents):
+  cleanCont = []
+  for word in contents:
+    cleanWord = ""
+    for letter in word:
+      if ord(letter) > 32 and ord(letter) < 65 or ord(letter) > 90 and ord(letter) < 97 or ord(letter) > 122:
+        continue
+      else:
+        cleanWord += letter
+
+    cleanCont.insert(0, cleanWord)
+  return cleanCont
+
 def main():
-    original = "Sphinx of black quartz, judge my vow"
-    new = ""
-
     stack = ArrayStack()
+    inPath = "earnest.txt"
+    outPath = "flipped.txt"
 
-    newOriginal = list(original)
+    contents = read(inPath)
+    cleanCont = clean(contents)
 
-    for i in range(len(newOriginal)):
-      stack.push(newOriginal[0])
-      del newOriginal[0]
+    flippedCont = ""
+    contList = []
+
+    for i in cleanCont:
+      sentence = i.split()
+      for i in range(len(sentence)):
+        flippedCont += sentence[-1]
+        flippedCont += " "
+        del sentence[-1]
+      flippedCont += "\n"
+      contList.append(flippedCont)
+      flippedCont = ""
+
+    for i in range(len(contList)):
+      stack.push(contList[-1])
+      del contList[-1]
 
     for i in range(len(stack)):
-      new += stack.pop()
+      flippedCont += stack.pop()
 
-    print(f"Original: {original}")
-    print(f"Reversed: {new}")
+    write(outPath, flippedCont)
 
 if __name__ == "__main__":
     main()

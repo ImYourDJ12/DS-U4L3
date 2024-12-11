@@ -1,3 +1,0 @@
-1. Everything in the stack occurs at the top of the stack. This makes it very easy
-to reverse a string in the stack because it will return the string starting at the
-back using pop.

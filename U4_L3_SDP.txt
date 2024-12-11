@@ -1,0 +1,4 @@
+1. This lab is similar in the fact that we are reverse text. Based on that information
+it will use similar code.
+2. It will differ in the ways that I need to flip a whole word opposed to all the
+letters in the sentence.
